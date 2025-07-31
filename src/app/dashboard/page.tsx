@@ -10,8 +10,10 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Shield, Users, Mail, Settings, Code } from "lucide-react";
 import Link from "next/link";
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
 
-const DashboardPage = () => {
+const DashboardPage = async () => {
   const techStack = [
     "Next.js 15",
     "Better Auth",
@@ -24,9 +26,15 @@ const DashboardPage = () => {
     "Zod",
   ];
 
+  const session = await auth.api.getSession({
+    headers: await headers()
+  })
+
+
+
   return (
     <div className="min-h-screen bg-background">
-      <Navbar />
+      <Navbar session={JSON.parse(JSON.stringify(session))} />
 
       <div className="container mx-auto px-4 py-8 max-w-6xl">
         {/* Quick Actions */}

@@ -15,10 +15,15 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { LogOut, Shield, User } from "lucide-react";
 import Image from "next/image";
+import { Session } from "@/lib/auth-types";
 
-const Navbar = () => {
-  const { signOut, useSession } = authClient;
-  const { data: session } = useSession();
+const Navbar = ({
+  session
+}: {
+  session: Session
+}) => {
+  const { signOut } = authClient;
+  // const { data: session } = useSession();
 
   const isAdmin = session?.user?.role === "admin";
 
