@@ -23,7 +23,6 @@ const Navbar = ({
   session: Session
 }) => {
   const { signOut } = authClient;
-  // const { data: session } = useSession();
 
   const isAdmin = session?.user?.role === "admin";
 

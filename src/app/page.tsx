@@ -11,8 +11,16 @@ import { Badge } from "@/components/ui/badge";
 import { Shield, Users, Database, Palette } from "lucide-react";
 import Link from "next/link";
 import { Hero } from "@/components/ui/animated-hero";
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
 
-const HomePage = () => {
+const HomePage = async () => {
+
+  const session = await auth.api.getSession({
+    headers: await headers()
+  })
+
+
   const features = [
     {
       icon: <Shield className="h-5 w-5" />,
@@ -73,7 +81,7 @@ const HomePage = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <Navbar />
+      <Navbar session={JSON.parse(JSON.stringify(session))} />
 
       <div className="container mx-auto px-4 py-8 max-w-6xl">
         {/* Hero Section */}
